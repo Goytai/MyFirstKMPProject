@@ -10,7 +10,20 @@ import com.goytai.myfirstkmpproject.domain.services.ITaskDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
+@Suppress("NO_ACTUAL_FOR_EXPECT")
+expect object AppDatabaseConstructor : RoomDatabaseConstructor<AppDatabase> {
+    override fun initialize(): AppDatabase
+}
+
 expect fun getDatabaseBuilder(): RoomDatabase.Builder<AppDatabase>
+
+fun getAppDatabase(): AppDatabase {
+    return getDatabaseBuilder()
+        .fallbackToDestructiveMigrationOnDowngrade(dropAllTables = true)
+        .setQueryCoroutineContext(Dispatchers.IO)
+        .setDriver(BundledSQLiteDriver())
+        .build()
+}
 
 @ConstructedBy(AppDatabaseConstructor::class)
 @Database(entities = [Task::class], version = 1, exportSchema = true)
@@ -18,16 +31,4 @@ abstract class AppDatabase: RoomDatabase() {
     abstract fun getTaskDao(): ITaskDao
 }
 
-@Suppress("NO_ACTUAL_FOR_EXPECT")
-expect object AppDatabaseConstructor : RoomDatabaseConstructor<AppDatabase> {
-    override fun initialize(): AppDatabase
-}
-
-fun getAppDatabase(): AppDatabase {
-    return getDatabaseBuilder()
-            .fallbackToDestructiveMigrationOnDowngrade(dropAllTables = true)
-            .setQueryCoroutineContext(Dispatchers.IO)
-            .setDriver(BundledSQLiteDriver())
-            .build()
-}
 
