@@ -48,6 +48,10 @@ kotlin {
             implementation(libs.room.runtime)
             implementation(libs.androidx.sqlite.bundled)
             implementation(libs.kotlinx.datetime)
+            implementation(libs.voyager.navigator)
+            implementation(libs.voyager.screenModel)
+            implementation(libs.voyager.kodein)
+            implementation(libs.voyager.lifecycle.kmp)
         }
 
     }
