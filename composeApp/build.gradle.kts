@@ -52,6 +52,7 @@ kotlin {
             implementation(libs.voyager.screenModel)
             implementation(libs.voyager.kodein)
             implementation(libs.voyager.lifecycle.kmp)
+            implementation(compose.materialIconsExtended)
         }
 
     }

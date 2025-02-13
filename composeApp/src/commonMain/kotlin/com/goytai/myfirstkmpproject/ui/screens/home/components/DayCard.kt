@@ -1,4 +1,4 @@
-package com.goytai.myfirstkmpproject.components
+package com.goytai.myfirstkmpproject.ui.screens.home.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -18,7 +18,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format
 import kotlinx.datetime.format.DayOfWeekNames
 
-data class DayCardVariants (
+private data class DayCardVariants (
     val background: Color,
     val borderColor: Color,
     val fontColor: Color

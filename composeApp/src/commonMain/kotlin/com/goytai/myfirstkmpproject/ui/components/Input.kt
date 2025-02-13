@@ -1,4 +1,4 @@
-package com.goytai.myfirstkmpproject.components
+package com.goytai.myfirstkmpproject.ui.components
 
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.shape.RoundedCornerShape

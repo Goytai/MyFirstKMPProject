@@ -1,4 +1,4 @@
-package com.goytai.myfirstkmpproject.components
+package com.goytai.myfirstkmpproject.ui.screens.home.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
