@@ -1,4 +1,3 @@
-
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -8,6 +7,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.ksp)
     alias(libs.plugins.android.room)
+    alias(libs.plugins.wire)
 }
 
 kotlin {
@@ -53,6 +53,8 @@ kotlin {
             implementation(libs.voyager.kodein)
             implementation(libs.voyager.lifecycle.kmp)
             implementation(compose.materialIconsExtended)
+            implementation(libs.androidx.datastore.datastore)
+            implementation(libs.androidx.datastore.preferences)
         }
 
     }
@@ -87,6 +89,13 @@ android {
 
 room {
     schemaDirectory("$projectDir/schemas")
+}
+
+wire {
+    kotlin {}
+    sourcePath {
+        srcDir("src/commonMain/proto")
+    }
 }
 
 dependencies {

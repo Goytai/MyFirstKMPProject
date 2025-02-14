@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option java_package = "com.goytai.myfirstkmpproject";
+option java_multiple_files = true;
+
+enum AppTheme {
+  SYSTEM = 0;
+  LIGHT = 1;
+  DARK = 2;
+}
+
+message AppSettings {
+  AppTheme appTheme = 1;
+}

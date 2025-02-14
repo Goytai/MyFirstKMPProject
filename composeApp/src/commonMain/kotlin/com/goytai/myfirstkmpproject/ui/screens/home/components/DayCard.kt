@@ -17,8 +17,9 @@ import androidx.compose.ui.unit.dp
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format
 import kotlinx.datetime.format.DayOfWeekNames
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
-private data class DayCardVariants (
+private data class DayCardVariants(
     val background: Color,
     val borderColor: Color,
     val fontColor: Color
@@ -33,14 +34,15 @@ fun DayCard(
     val variant = when (isSelected) {
         true -> {
             DayCardVariants(
-                fontColor = Color.Black,
+                fontColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 background = MaterialTheme.colorScheme.primaryContainer,
                 borderColor = MaterialTheme.colorScheme.primaryContainer,
             )
         }
+
         false -> {
             DayCardVariants(
-                fontColor = Color.Gray,
+                fontColor = MaterialTheme.colorScheme.outline,
                 background = MaterialTheme.colorScheme.background,
                 borderColor = MaterialTheme.colorScheme.surfaceContainer,
             )
@@ -82,4 +84,17 @@ fun DayCard(
             )
         }
     }
+}
+
+@Preview
+@Composable
+private fun DayCardPreview() {
+    DayCard(
+        date = LocalDate(
+            dayOfMonth = 14,
+            monthNumber = 2,
+            year = 2025,
+        ),
+        isSelected = false
+    )
 }

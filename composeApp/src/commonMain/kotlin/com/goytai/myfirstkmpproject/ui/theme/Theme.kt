@@ -1,9 +1,14 @@
 package com.goytai.myfirstkmpproject.ui.theme
+
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import com.goytai.myfirstkmpproject.AppTheme
+import kotlinx.coroutines.flow.map
+import org.kodein.di.compose.localDI
+import org.kodein.di.instance
 
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
@@ -83,18 +88,22 @@ private val darkScheme = darkColorScheme(
 
 @Composable
 fun AppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    mode: AppTheme,
     content: @Composable() () -> Unit
 ) {
-  val colorScheme = when (darkTheme) {
-      true -> darkScheme
-      false -> lightScheme
-  }
+    val di = localDI()
+    val isSystemDarkMode = isSystemInDarkTheme()
 
-  MaterialTheme(
-    colorScheme = colorScheme,
-    typography = AppTypography(),
-    content = content
-  )
+    val colorScheme = when (mode) {
+        AppTheme.DARK -> darkScheme
+        AppTheme.LIGHT -> lightScheme
+        AppTheme.SYSTEM -> if (isSystemDarkMode) darkScheme else lightScheme
+    }
+
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = AppTypography(),
+        content = content
+    )
 }
 

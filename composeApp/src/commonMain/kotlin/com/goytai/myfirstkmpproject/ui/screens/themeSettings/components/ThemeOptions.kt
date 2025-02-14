@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-private data class ThemeOptionsVariants (
+private data class ThemeOptionsVariants(
     val backgroundColor: Color,
     val borderColor: Color,
     val fontColor: Color,
@@ -39,6 +39,7 @@ fun ThemeOptions(
                 fontWeight = FontWeight.SemiBold
             )
         }
+
         false -> {
             ThemeOptionsVariants(
                 borderColor = MaterialTheme.colorScheme.surfaceContainer,
@@ -49,25 +50,25 @@ fun ThemeOptions(
         }
     }
 
-    Card (
+    Card(
         colors = CardDefaults.cardColors(containerColor = variant.backgroundColor),
         border = BorderStroke(width = 2.dp, color = variant.borderColor),
         onClick = { onClick() }
     ) {
-        Row (
+        Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier
-                .padding( vertical = 12.dp, horizontal = 16.dp)
+                .padding(vertical = 12.dp, horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            Icon (
+            Icon(
                 imageVector = icon,
                 contentDescription = title,
                 modifier = Modifier.size(32.dp),
             )
 
-            Text (
+            Text(
                 text = title,
                 fontSize = 18.sp,
                 fontWeight = variant.fontWeight,

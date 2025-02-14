@@ -13,6 +13,7 @@ androidx-espresso-core = "3.6.1"
 androidx-lifecycle = "2.8.4"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
+androidxDatastore = "1.1.2"
 compose-multiplatform = "1.7.0"
 junit = "4.13.2"
 kodeinDiFrameworkCompose = "7.25.0"
@@ -23,10 +24,13 @@ material3Android = "1.3.1"
 room = "2.7.0-alpha13"
 sqliteBundled = "2.5.0-alpha13"
 voyager = "1.1.0-beta03"
+wire = "5.2.1"
 
 
 [libraries]
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
+androidx-datastore-datastore = { module = "androidx.datastore:datastore", version.ref = "androidxDatastore" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidxDatastore" }
 androidx-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqliteBundled" }
 kodein-di-framework-compose = { module = "org.kodein.di:kodein-di-framework-compose", version.ref = "kodeinDiFrameworkCompose" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -58,4 +62,5 @@ composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "k
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "kotlin-ksp" }
 android-room = { id = "androidx.room", version.ref = "room" }
+wire = { id = "com.squareup.wire", version.ref = "wire" }
 
