@@ -15,6 +15,8 @@ import org.kodein.di.bindSingleton
 import org.kodein.di.instance
 
 val di = DI {
+    import(screenModelsDi)
+
     bindSingleton<DataStore<AppSettings>> { createDataStore() }
 
     bindSingleton<IAppSettingsRepository> { AppSettingsRepository(dataStore = instance()) }
