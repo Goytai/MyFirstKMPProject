@@ -105,7 +105,7 @@ class HomeScreenModel(private val params: ScreenModelParams) : ScreenModel {
     }
 
     screenModelScope.launch {
-      _taskRepository.updateTask(task)
+      _taskRepository.updateTask(newTask)
     }
   }
 
