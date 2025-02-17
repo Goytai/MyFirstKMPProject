@@ -13,17 +13,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
-        instance = this
-
         setContent {
             App()
         }
     }
-
-    companion object {
-        lateinit var instance: MainActivity
-    }
-
 }
 
 @Preview
