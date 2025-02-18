@@ -1,7 +1,12 @@
 package com.goytai.myfirstkmpproject.domain.model
 
+import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDate
+
 interface ITask {
     val id: String
     val name: String
-    val isDone: Boolean
+    var isDone: Boolean
+    val scheduleDate: LocalDate
+    val createdAt: Instant
 }

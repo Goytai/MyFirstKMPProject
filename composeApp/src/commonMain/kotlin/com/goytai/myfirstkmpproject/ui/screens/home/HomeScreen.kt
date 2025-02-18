@@ -23,7 +23,6 @@ import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.goytai.myfirstkmpproject.infra.di.ScreenModelParams
-import com.goytai.myfirstkmpproject.infra.di.di
 import com.goytai.myfirstkmpproject.ui.components.Input
 import com.goytai.myfirstkmpproject.ui.components.ScreenContainer
 import com.goytai.myfirstkmpproject.ui.components.ScreenHeader
@@ -66,7 +65,8 @@ class HomeScreen : Screen {
                     screenModel.dates.forEach {
                         DayCard(
                             date = it,
-                            isSelected = selectedDate == it
+                            isSelected = selectedDate == it,
+                            onClick = { screenModel.handleOnChangeSelectedDate(it) }
                         )
                     }
                 }

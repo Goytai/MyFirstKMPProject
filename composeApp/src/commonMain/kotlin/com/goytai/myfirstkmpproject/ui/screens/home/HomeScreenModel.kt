@@ -6,10 +6,7 @@ import com.goytai.myfirstkmpproject.data.model.Task
 import com.goytai.myfirstkmpproject.domain.repository.ITaskRepository
 import com.goytai.myfirstkmpproject.infra.di.ScreenModelParams
 import com.goytai.myfirstkmpproject.ui.screens.settings.SettingsScreen
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.datetime.*
 import org.kodein.di.instance
@@ -34,10 +31,16 @@ class HomeScreenModel(private val params: ScreenModelParams) : ScreenModel {
 
   // Init
   init {
-    screenModelScope.launch {
-      val savedTasks = _taskRepository.getAllTasks()
+    fetchTasksByScheduleDate(scheduleDate = selectedDate.value)
+    onChangeSelectedDate()
+  }
 
-      _tasks.update { (it + savedTasks).toMutableList() }
+  // Observers
+  private fun onChangeSelectedDate() {
+    screenModelScope.launch {
+      _selectedDate.collect {
+        fetchTasksByScheduleDate(it)
+      }
     }
   }
 
@@ -71,6 +74,14 @@ class HomeScreenModel(private val params: ScreenModelParams) : ScreenModel {
     }
   }
 
+  private fun fetchTasksByScheduleDate(scheduleDate: LocalDate) {
+    screenModelScope.launch {
+      val savedTasks = _taskRepository.getTasksByScheduleDate(scheduleDate)
+
+      _tasks.update { savedTasks.toMutableList() }
+    }
+  }
+
 
   // Public Methods
   fun handleOnTaskInputChange(newValue: String) {
@@ -80,7 +91,11 @@ class HomeScreenModel(private val params: ScreenModelParams) : ScreenModel {
   fun handleOnAddNewTask() {
     if (_newTaskInput.value.trim().isEmpty()) return
 
-    val task = Task(name = _newTaskInput.value.trim(), isDone = false)
+    val task = Task(
+      name = _newTaskInput.value.trim(),
+      isDone = false,
+      scheduleDate = selectedDate.value
+    )
 
     _tasks.update {
       it.add(task)
@@ -111,6 +126,10 @@ class HomeScreenModel(private val params: ScreenModelParams) : ScreenModel {
 
   fun handleOnNavigateToSettings() {
     navigator.push(SettingsScreen())
+  }
+
+  fun handleOnChangeSelectedDate(date: LocalDate) {
+    _selectedDate.update { date }
   }
 
 }

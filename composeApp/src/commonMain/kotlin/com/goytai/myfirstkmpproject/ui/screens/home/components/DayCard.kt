@@ -1,9 +1,7 @@
 package com.goytai.myfirstkmpproject.ui.screens.home.components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -29,6 +27,7 @@ private data class DayCardVariants(
 fun DayCard(
     date: LocalDate,
     isSelected: Boolean = false,
+    onClick: () -> Unit
 ) {
 
     val variant = when (isSelected) {
@@ -51,10 +50,11 @@ fun DayCard(
 
     Card(
         colors = CardDefaults.cardColors(containerColor = variant.background),
-        border = BorderStroke(width = 2.dp, color = variant.borderColor)
+        border = BorderStroke(width = 2.dp, color = variant.borderColor),
+        onClick = { onClick() }
     ) {
         Column(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.padding(12.dp).defaultMinSize(minWidth = 40.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
@@ -95,6 +95,7 @@ private fun DayCardPreview() {
             monthNumber = 2,
             year = 2025,
         ),
-        isSelected = false
+        isSelected = false,
+        onClick = {}
     )
 }

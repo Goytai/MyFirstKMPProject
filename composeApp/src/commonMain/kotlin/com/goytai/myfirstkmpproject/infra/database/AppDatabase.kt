@@ -1,9 +1,6 @@
 package com.goytai.myfirstkmpproject.infra.database
 
-import androidx.room.ConstructedBy
-import androidx.room.Database
-import androidx.room.RoomDatabase
-import androidx.room.RoomDatabaseConstructor
+import androidx.room.*
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import com.goytai.myfirstkmpproject.data.model.Task
 import com.goytai.myfirstkmpproject.domain.services.ITaskDao
@@ -27,7 +24,8 @@ fun getAppDatabase(): AppDatabase {
 
 @ConstructedBy(AppDatabaseConstructor::class)
 @Database(entities = [Task::class], version = 1, exportSchema = true)
-abstract class AppDatabase: RoomDatabase() {
+@TypeConverters(Converters::class)
+abstract class AppDatabase : RoomDatabase() {
     abstract fun getTaskDao(): ITaskDao
 }
 

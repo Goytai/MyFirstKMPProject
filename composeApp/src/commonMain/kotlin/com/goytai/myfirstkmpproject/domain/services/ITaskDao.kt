@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.goytai.myfirstkmpproject.data.model.Task
+import kotlinx.datetime.LocalDate
 
 @Dao
 interface ITaskDao {
@@ -23,4 +24,7 @@ interface ITaskDao {
 
     @Query("SELECT * from tasks ORDER BY name ASC")
     suspend fun getAllTasks(): List<Task>
+
+    @Query("SELECT * FROM tasks WHERE scheduleDate = :scheduleDate")
+    suspend fun getTasksByScheduleDate(scheduleDate: LocalDate): List<Task>
 }
