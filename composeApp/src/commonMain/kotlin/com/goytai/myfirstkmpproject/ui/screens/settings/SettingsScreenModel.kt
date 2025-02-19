@@ -5,7 +5,6 @@ import com.goytai.myfirstkmpproject.infra.di.ScreenModelParams
 import com.goytai.myfirstkmpproject.ui.screens.themeSettings.ThemeSettingsScreen
 
 class SettingsScreenModel(private val params: ScreenModelParams) : ScreenModel {
-  private val di = params.di
   private val navigator = params.navigator
 
 

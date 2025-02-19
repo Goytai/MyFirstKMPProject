@@ -19,13 +19,12 @@ import com.goytai.myfirstkmpproject.infra.di.ScreenModelParams
 import com.goytai.myfirstkmpproject.ui.components.ScreenContainer
 import com.goytai.myfirstkmpproject.ui.components.ScreenHeader
 import com.goytai.myfirstkmpproject.ui.screens.themeSettings.components.ThemeOptions
-import org.kodein.di.compose.localDI
 
 class ThemeSettingsScreen : Screen {
   @Composable
   override fun Content() {
     val screenModel = rememberScreenModel<ScreenModelParams, ThemeSettingsScreenModel>(
-      arg = ScreenModelParams(localDI(), LocalNavigator.currentOrThrow)
+      arg = ScreenModelParams(navigator = LocalNavigator.currentOrThrow)
     )
 
     val appTheme by screenModel.appTheme.collectAsState(initial = AppTheme.SYSTEM)

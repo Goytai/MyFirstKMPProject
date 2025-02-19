@@ -12,13 +12,12 @@ import com.goytai.myfirstkmpproject.infra.di.ScreenModelParams
 import com.goytai.myfirstkmpproject.ui.components.ScreenContainer
 import com.goytai.myfirstkmpproject.ui.components.ScreenHeader
 import com.goytai.myfirstkmpproject.ui.screens.settings.components.SettingOption
-import org.kodein.di.compose.localDI
 
 class SettingsScreen : Screen {
     @Composable
     override fun Content() {
         val screenModel = rememberScreenModel<ScreenModelParams, SettingsScreenModel>(
-            arg = ScreenModelParams(localDI(), LocalNavigator.currentOrThrow)
+            arg = ScreenModelParams(navigator = LocalNavigator.currentOrThrow)
         )
 
         ScreenContainer {

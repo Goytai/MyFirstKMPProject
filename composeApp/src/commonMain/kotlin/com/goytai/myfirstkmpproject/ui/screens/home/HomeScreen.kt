@@ -28,13 +28,12 @@ import com.goytai.myfirstkmpproject.ui.components.ScreenContainer
 import com.goytai.myfirstkmpproject.ui.components.ScreenHeader
 import com.goytai.myfirstkmpproject.ui.screens.home.components.DayCard
 import com.goytai.myfirstkmpproject.ui.screens.home.components.TaskItem
-import org.kodein.di.compose.localDI
 
 class HomeScreen : Screen {
     @Composable
     override fun Content() {
         val screenModel = rememberScreenModel<ScreenModelParams, HomeScreenModel>(
-            arg = ScreenModelParams(localDI(), LocalNavigator.currentOrThrow),
+            arg = ScreenModelParams(navigator = LocalNavigator.currentOrThrow),
         )
 
         val newTaskInput by screenModel.newTaskInput.collectAsState()

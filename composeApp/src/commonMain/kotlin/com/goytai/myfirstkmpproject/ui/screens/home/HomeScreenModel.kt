@@ -9,13 +9,12 @@ import com.goytai.myfirstkmpproject.ui.screens.settings.SettingsScreen
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.datetime.*
-import org.kodein.di.instance
 
-class HomeScreenModel(private val params: ScreenModelParams) : ScreenModel {
-  private val di = params.di
+class HomeScreenModel(
+  private val params: ScreenModelParams,
+  private val taskRepository: ITaskRepository
+) : ScreenModel {
   private val navigator = params.navigator
-  private val _taskRepository: ITaskRepository by di.instance()
-
 
   private val _newTaskInput = MutableStateFlow("")
   val newTaskInput: StateFlow<String> get() = _newTaskInput.asStateFlow()
@@ -76,7 +75,7 @@ class HomeScreenModel(private val params: ScreenModelParams) : ScreenModel {
 
   private fun fetchTasksByScheduleDate(scheduleDate: LocalDate) {
     screenModelScope.launch {
-      val savedTasks = _taskRepository.getTasksByScheduleDate(scheduleDate)
+      val savedTasks = taskRepository.getTasksByScheduleDate(scheduleDate)
 
       _tasks.update { savedTasks.toMutableList() }
     }
@@ -103,7 +102,7 @@ class HomeScreenModel(private val params: ScreenModelParams) : ScreenModel {
     }
 
     screenModelScope.launch {
-      _taskRepository.insertTask(task)
+      taskRepository.insertTask(task)
     }
 
     _newTaskInput.update { "" }
@@ -120,7 +119,7 @@ class HomeScreenModel(private val params: ScreenModelParams) : ScreenModel {
     }
 
     screenModelScope.launch {
-      _taskRepository.updateTask(newTask)
+      taskRepository.updateTask(newTask)
     }
   }
 

@@ -7,16 +7,15 @@ import com.goytai.myfirstkmpproject.domain.repository.IAppSettingsRepository
 import com.goytai.myfirstkmpproject.infra.di.ScreenModelParams
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import org.kodein.di.instance
 
-class ThemeSettingsScreenModel(private val params: ScreenModelParams) : ScreenModel {
-  private val di = params.di
+class ThemeSettingsScreenModel(
+  private val params: ScreenModelParams,
+  private val appSettingsRepository: IAppSettingsRepository
+) : ScreenModel {
   private val navigator = params.navigator
 
-  private val _appSettingsRepository: IAppSettingsRepository by di.instance()
+  val appTheme: Flow<AppTheme> get() = appSettingsRepository.getAppTheme()
 
-  val appTheme: Flow<AppTheme> get() = _appSettingsRepository.getAppTheme()
-  
 
   // Public Methods
   fun handleOnBack() {
@@ -25,7 +24,7 @@ class ThemeSettingsScreenModel(private val params: ScreenModelParams) : ScreenMo
 
   fun handleOnChangeAppThemeMode(mode: AppTheme) {
     screenModelScope.launch {
-      _appSettingsRepository.updateAppTheme(mode)
+      appSettingsRepository.updateAppTheme(mode)
     }
   }
 }
