@@ -7,6 +7,7 @@ interface ITask {
     val id: String
     val name: String
     var isDone: Boolean
+    val doneAt: Instant?
     val scheduleDate: LocalDate
     val createdAt: Instant
 }

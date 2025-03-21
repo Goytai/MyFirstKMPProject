@@ -23,14 +23,14 @@ fun ScreenHeader(
     onBack: (() -> Unit)? = null,
     rightContent: (@Composable () -> Unit)? = null
 ) {
-    Row (
+    Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         modifier = Modifier.padding(bottom = 32.dp),
     ) {
 
         if (onBack != null) {
-            IconButton( onClick = {onBack()} ) {
+            IconButton(onClick = { onBack() }) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Rounded.NavigateBefore,
                     contentDescription = "Back",
@@ -41,10 +41,11 @@ fun ScreenHeader(
         }
 
 
-        Text (
+        Text(
             text = title,
             fontSize = 36.sp,
             fontWeight = FontWeight.Bold,
+            lineHeight = 40.sp,
             color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier
                 .weight(1f)

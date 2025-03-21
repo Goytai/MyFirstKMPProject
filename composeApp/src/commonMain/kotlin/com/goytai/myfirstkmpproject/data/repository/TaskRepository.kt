@@ -8,7 +8,7 @@ import kotlinx.datetime.LocalDate
 class TaskRepository(private val taskDao: ITaskDao) : ITaskRepository {
     override suspend fun getAllTasks(): List<Task> = taskDao.getAllTasks()
 
-    override suspend fun getTask(id: Int): Task? = taskDao.getTask(id)
+    override suspend fun getTask(id: String): Task? = taskDao.getTask(id)
 
     override suspend fun insertTask(item: Task) = taskDao.insert(item)
 

@@ -22,7 +22,6 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.goytai.myfirstkmpproject.infra.di.ScreenModelParams
 import com.goytai.myfirstkmpproject.ui.components.Input
 import com.goytai.myfirstkmpproject.ui.components.ScreenContainer
 import com.goytai.myfirstkmpproject.ui.components.ScreenHeader
@@ -32,8 +31,8 @@ import com.goytai.myfirstkmpproject.ui.screens.home.components.TaskItem
 class HomeScreen : Screen {
     @Composable
     override fun Content() {
-        val screenModel = rememberScreenModel<ScreenModelParams, HomeScreenModel>(
-            arg = ScreenModelParams(navigator = LocalNavigator.currentOrThrow),
+        val screenModel = rememberScreenModel<HomeScreenModelParams, HomeScreenModel>(
+            arg = HomeScreenModelParams(navigator = LocalNavigator.currentOrThrow),
         )
 
         val newTaskInput by screenModel.newTaskInput.collectAsState()
@@ -80,7 +79,11 @@ class HomeScreen : Screen {
                     )
 
                     tasks.forEach {
-                        TaskItem(task = it, onClick = { screenModel.handleOnToggleTaskState(it) })
+                        TaskItem(
+                            task = it,
+                            onClick = { screenModel.handleOnNavigateToTaskNotes(it) },
+                            onToggleCheckBox = { screenModel.handleOnToggleTaskState(it) }
+                        )
                     }
                 }
             }

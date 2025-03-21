@@ -20,11 +20,11 @@ interface ITaskDao {
     suspend fun delete(task: Task)
 
     @Query("SELECT * from tasks WHERE id = :id")
-    suspend fun getTask(id: Int): Task?
+    suspend fun getTask(id: String): Task?
 
     @Query("SELECT * from tasks ORDER BY name ASC")
     suspend fun getAllTasks(): List<Task>
 
-    @Query("SELECT * FROM tasks WHERE scheduleDate = :scheduleDate")
+    @Query("SELECT * FROM tasks WHERE schedule_date = :scheduleDate")
     suspend fun getTasksByScheduleDate(scheduleDate: LocalDate): List<Task>
 }

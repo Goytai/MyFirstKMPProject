@@ -2,14 +2,16 @@ package com.goytai.myfirstkmpproject.ui.screens.themeSettings
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
+import cafe.adriel.voyager.navigator.Navigator
 import com.goytai.myfirstkmpproject.AppTheme
 import com.goytai.myfirstkmpproject.domain.repository.IAppSettingsRepository
-import com.goytai.myfirstkmpproject.infra.di.ScreenModelParams
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class ThemeSettingsScreenModel(
-  private val params: ScreenModelParams,
+internal data class ThemeSettingsScreenModelParams(val navigator: Navigator)
+
+internal class ThemeSettingsScreenModel(
+  private val params: ThemeSettingsScreenModelParams,
   private val appSettingsRepository: IAppSettingsRepository
 ) : ScreenModel {
   private val navigator = params.navigator

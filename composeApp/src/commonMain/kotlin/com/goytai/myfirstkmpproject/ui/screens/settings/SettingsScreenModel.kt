@@ -1,10 +1,13 @@
 package com.goytai.myfirstkmpproject.ui.screens.settings
 
 import cafe.adriel.voyager.core.model.ScreenModel
-import com.goytai.myfirstkmpproject.infra.di.ScreenModelParams
+import cafe.adriel.voyager.navigator.Navigator
 import com.goytai.myfirstkmpproject.ui.screens.themeSettings.ThemeSettingsScreen
 
-class SettingsScreenModel(private val params: ScreenModelParams) : ScreenModel {
+
+internal data class SettingsScreenModelParams(val navigator: Navigator)
+
+internal class SettingsScreenModel(private val params: SettingsScreenModelParams) : ScreenModel {
   private val navigator = params.navigator
 
 

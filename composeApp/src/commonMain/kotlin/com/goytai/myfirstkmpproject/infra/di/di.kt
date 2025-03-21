@@ -3,10 +3,13 @@ package com.goytai.myfirstkmpproject.infra.di
 import androidx.datastore.core.DataStore
 import com.goytai.myfirstkmpproject.AppSettings
 import com.goytai.myfirstkmpproject.data.repository.AppSettingsRepository
+import com.goytai.myfirstkmpproject.data.repository.TaskNoteRepository
 import com.goytai.myfirstkmpproject.data.repository.TaskRepository
 import com.goytai.myfirstkmpproject.domain.repository.IAppSettingsRepository
+import com.goytai.myfirstkmpproject.domain.repository.ITaskNoteRepository
 import com.goytai.myfirstkmpproject.domain.repository.ITaskRepository
 import com.goytai.myfirstkmpproject.domain.services.ITaskDao
+import com.goytai.myfirstkmpproject.domain.services.ITaskNoteDao
 import com.goytai.myfirstkmpproject.infra.database.AppDatabase
 import com.goytai.myfirstkmpproject.infra.database.getAppDatabase
 import com.goytai.myfirstkmpproject.infra.datastore.createDataStore
@@ -25,5 +28,9 @@ val di = DI {
 
     bindSingleton<ITaskDao> { instance<AppDatabase>().getTaskDao() }
 
+    bindSingleton<ITaskNoteDao> { instance<AppDatabase>().getTaskNoteDao() }
+
     bindSingleton<ITaskRepository> { TaskRepository(taskDao = instance()) }
+
+    bindSingleton<ITaskNoteRepository> { TaskNoteRepository(taskNoteDao = instance()) }
 }

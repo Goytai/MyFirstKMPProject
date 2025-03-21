@@ -2,16 +2,19 @@ package com.goytai.myfirstkmpproject.ui.screens.home
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
+import cafe.adriel.voyager.navigator.Navigator
 import com.goytai.myfirstkmpproject.data.model.Task
 import com.goytai.myfirstkmpproject.domain.repository.ITaskRepository
-import com.goytai.myfirstkmpproject.infra.di.ScreenModelParams
 import com.goytai.myfirstkmpproject.ui.screens.settings.SettingsScreen
+import com.goytai.myfirstkmpproject.ui.screens.taskNotes.TaskNotesScreen
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.datetime.*
 
-class HomeScreenModel(
-  private val params: ScreenModelParams,
+internal data class HomeScreenModelParams(val navigator: Navigator)
+
+internal class HomeScreenModel(
+  private val params: HomeScreenModelParams,
   private val taskRepository: ITaskRepository
 ) : ScreenModel {
   private val navigator = params.navigator
@@ -110,7 +113,8 @@ class HomeScreenModel(
 
   fun handleOnToggleTaskState(task: Task) {
     val taskIndex = _tasks.value.indexOf(task)
-    val newTask = task.copy(isDone = !task.isDone)
+    val isDoneAt = if (!task.isDone) Clock.System.now() else null
+    val newTask = task.copy(isDone = !task.isDone, doneAt = isDoneAt)
 
     _tasks.update {
       it.toMutableList().apply {
@@ -125,6 +129,10 @@ class HomeScreenModel(
 
   fun handleOnNavigateToSettings() {
     navigator.push(SettingsScreen())
+  }
+
+  fun handleOnNavigateToTaskNotes(task: Task) {
+    navigator.push(TaskNotesScreen(task = task))
   }
 
   fun handleOnChangeSelectedDate(date: LocalDate) {

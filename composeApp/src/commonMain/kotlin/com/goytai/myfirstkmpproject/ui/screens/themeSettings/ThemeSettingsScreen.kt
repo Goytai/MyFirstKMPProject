@@ -15,7 +15,6 @@ import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.goytai.myfirstkmpproject.AppTheme
-import com.goytai.myfirstkmpproject.infra.di.ScreenModelParams
 import com.goytai.myfirstkmpproject.ui.components.ScreenContainer
 import com.goytai.myfirstkmpproject.ui.components.ScreenHeader
 import com.goytai.myfirstkmpproject.ui.screens.themeSettings.components.ThemeOptions
@@ -23,12 +22,11 @@ import com.goytai.myfirstkmpproject.ui.screens.themeSettings.components.ThemeOpt
 class ThemeSettingsScreen : Screen {
   @Composable
   override fun Content() {
-    val screenModel = rememberScreenModel<ScreenModelParams, ThemeSettingsScreenModel>(
-      arg = ScreenModelParams(navigator = LocalNavigator.currentOrThrow)
+    val screenModel = rememberScreenModel<ThemeSettingsScreenModelParams, ThemeSettingsScreenModel>(
+      arg = ThemeSettingsScreenModelParams(navigator = LocalNavigator.currentOrThrow)
     )
 
     val appTheme by screenModel.appTheme.collectAsState(initial = AppTheme.SYSTEM)
-
 
     ScreenContainer {
       ScreenHeader(

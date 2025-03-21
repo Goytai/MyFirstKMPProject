@@ -14,10 +14,10 @@ import androidx.compose.ui.unit.sp
 import com.goytai.myfirstkmpproject.data.model.Task
 
 @Composable
-fun TaskItem(task: Task, onClick: () -> Unit) {
-    Card(onClick = { onClick() }, modifier = Modifier.padding(bottom=16.dp)) {
-        Row (modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Checkbox(checked = task.isDone, onCheckedChange = { onClick() })
+fun TaskItem(task: Task, onClick: () -> Unit, onToggleCheckBox: () -> Unit) {
+    Card(onClick = { onClick() }, modifier = Modifier.padding(bottom = 16.dp)) {
+        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Checkbox(checked = task.isDone, onCheckedChange = { onToggleCheckBox() })
 
             Text(text = task.name, fontSize = 17.sp)
         }

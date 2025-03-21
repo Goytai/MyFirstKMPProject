@@ -42,6 +42,7 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(compose.materialIconsExtended)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.kodein.di.framework.compose)
@@ -52,7 +53,6 @@ kotlin {
             implementation(libs.voyager.screenModel)
             implementation(libs.voyager.kodein)
             implementation(libs.voyager.lifecycle.kmp)
-            implementation(compose.materialIconsExtended)
             implementation(libs.androidx.datastore.datastore)
             implementation(libs.androidx.datastore.preferences)
         }
